@@ -50,4 +50,3 @@ jobs:
 git add .
 git commit -m "Day 3: Backend на Flask"
 git push origin main
-
