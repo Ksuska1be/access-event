@@ -1,3 +1,31 @@
+name: Day 2 Check
+
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/day2-check.yml'
+
+jobs:
+  check-day2:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Check file structure
         run: |
           echo "Проверка наличия файлов..."
